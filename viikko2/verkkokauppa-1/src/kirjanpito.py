@@ -7,3 +7,5 @@ class Kirjanpito:
 
     def get_tapahtumat(self):
         return self.tapahtumat
+
+the_kirjanpito_olio = Kirjanpito()
