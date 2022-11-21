@@ -1,0 +1,15 @@
+[[package]]
+name = "robotframework"
+version = "6.0.1"
+description = "Generic automation framework for acceptance testing and robotic process automation (RPA)"
+category = "dev"
+optional = false
+python-versions = ">=3.6"
+
+[metadata]
+lock-version = "1.1"
+python-versions = "^3.8"
+content-hash = "7f9b662d09bd86848d25e19fcd25d9844c1e14c0d41bfd81cbd613d67270150b"
+
+[metadata.files]
+robotframework = []
