@@ -59,10 +59,19 @@ class TestOstoskori(unittest.TestCase):
 
         self.assertEqual(self.kori.hinta(), 2*8)
 
-    def test_yhden_tuotteen_lisaamisen_jalkeen_ostoskori_sisaltaa_yhden_ostoksen(self):
+    def test_yhden_tuotteen_lisaamisen_jalkeen_korissa_yksi_ostosolio(self):
         juusto = Tuote("Juusto", 8)
         self.kori.lisaa_tuote(juusto)
 
         ostokset = self.kori.ostokset()
 
         self.assertEqual(len(ostokset), 1)
+
+    def test_yhden_tuotteen_lisaamisen_jalkeen_korissa_yksi_ostosolio_jolla_oikea_tuotteen_nimi_ja_maara(self):
+        juusto = Tuote("Juusto", 8)
+        self.kori.lisaa_tuote(juusto)
+
+        ostos = self.kori.ostokset()[0]
+
+        self.assertEqual(ostos.tuotteen_nimi(), "Juusto")
+        self.assertEqual(ostos.hinta(), 8)
