@@ -42,6 +42,9 @@ class Ostoskori:
         ostos = self.ostoskori[poistettava.nimi()]
         ostos.muuta_lukumaaraa(-1)
 
+        if ostos.lukumaara() <= 0:
+            self.ostoskori.pop(poistettava.nimi())
+
     def tyhjenna(self):
         pass
         # tyhjentää ostoskorin
