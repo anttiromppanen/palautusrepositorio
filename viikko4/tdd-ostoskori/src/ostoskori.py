@@ -5,15 +5,14 @@ from ostos import Ostos
 class Ostoskori:
     def __init__(self):
         # ostoskori tallettaa Ostos-oliota, yhden per korissa oleva Tuote
-        self.ostoskori = []
-        self.ostosten_nimet = {}
+        self.ostoskori = {}
 
     def tavaroita_korissa(self):
         # kertoo korissa olevien tavaroiden lukumäärän
         # eli jos koriin lisätty 2 kpl tuotetta "maito", tulee metodin palauttaa 2
         # samoin jos korissa on 1 kpl tuotetta "maito" ja 1 kpl tuotetta "juusto", tulee metodin palauttaa 2
         summa = 0
-        for ostos in self.ostoskori:
+        for ostos in self.ostoskori.values():
             summa += ostos.lukumaara()
 
         return summa
@@ -21,25 +20,27 @@ class Ostoskori:
     def hinta(self):
         # kertoo korissa olevien ostosten yhteenlasketun hinnan
         summa = 0
-        for ostos in self.ostoskori:
+        for ostos in self.ostoskori.values():
             summa += ostos.hinta()
 
         return summa
 
     def lisaa_tuote(self, lisattava: Tuote):
         # lisää tuotteen
-        if lisattava.nimi() in self.ostosten_nimet:
-            ostos = [ostos for ostos in self.ostoskori if ostos.tuotteen_nimi()
-                     == lisattava.nimi()][0]
+        if lisattava.nimi() in self.ostoskori:
+            ostos = self.ostoskori[lisattava.nimi()]
             ostos.muuta_lukumaaraa(1)
             return
 
-        self.ostoskori.append(Ostos(lisattava))
-        self.ostosten_nimet[lisattava.nimi()] = True
+        self.ostoskori[lisattava.nimi()] = (Ostos(lisattava))
 
     def poista_tuote(self, poistettava: Tuote):
         # poistaa tuotteen
-        pass
+        if poistettava.nimi() not in self.ostoskori:
+            return
+
+        ostos = self.ostoskori[poistettava.nimi()]
+        ostos.muuta_lukumaaraa(-1)
 
     def tyhjenna(self):
         pass
@@ -48,4 +49,4 @@ class Ostoskori:
     def ostokset(self):
         # palauttaa listan jossa on korissa olevat ostos-oliot
         # kukin ostos-olio siis kertoo mistä tuotteesta on kyse JA kuinka monta kappaletta kyseistä tuotetta korissa on
-        return self.ostoskori
+        return list(self.ostoskori.values())
