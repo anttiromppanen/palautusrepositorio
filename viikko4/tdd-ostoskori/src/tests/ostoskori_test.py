@@ -43,19 +43,15 @@ class TestOstoskori(unittest.TestCase):
 
     def test_kahden_saman_tuotteen_lisaamisen_jalkeen_ostoskorissa_on_kaksi_tavaraa(self):
         juusto = Tuote("Juusto", 8)
-        juusto2 = Tuote("Juusto", 8)
-
         self.kori.lisaa_tuote(juusto)
-        self.kori.lisaa_tuote(juusto2)
+        self.kori.lisaa_tuote(juusto)
 
         self.assertEqual(self.kori.tavaroita_korissa(), 2)
 
-    def test_kahden_saman_tuotteen_lisaamisen_jalkeen_ostoskorissa_on_kaksi_tavaraa(self):
+    def test_kahden_saman_tuotteen_lisaamisen_jalkeen_ostoskorin_hinta_on_sama_kuin_kaksi_kertaa_tuotteen_hinta(self):
         juusto = Tuote("Juusto", 8)
-        juusto2 = Tuote("Juusto", 8)
-
         self.kori.lisaa_tuote(juusto)
-        self.kori.lisaa_tuote(juusto2)
+        self.kori.lisaa_tuote(juusto)
 
         self.assertEqual(self.kori.hinta(), 2*8)
 
@@ -75,3 +71,5 @@ class TestOstoskori(unittest.TestCase):
 
         self.assertEqual(ostos.tuotteen_nimi(), "Juusto")
         self.assertEqual(ostos.hinta(), 8)
+
+    # def test_kahden_eri_tuotteen_lisaamisen_jalkeen_ostoskori_sisaltaa_kaksi_ostosta(self):
