@@ -119,3 +119,14 @@ class TestOstoskori(unittest.TestCase):
         ostokset = self.kori.ostokset()
 
         self.assertFalse(ostokset)
+
+    def test_metodi_tyhjenna_tyhjentaa_korin(self):
+        juusto = Tuote("Juusto", 8)
+        sipuli = Tuote("Sipuli", 1)
+        self.kori.lisaa_tuote(juusto)
+        self.kori.lisaa_tuote(sipuli)
+        self.kori.tyhjenna()
+
+        ostokset = self.kori.ostokset()
+
+        self.assertFalse(ostokset)
